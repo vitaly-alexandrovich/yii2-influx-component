@@ -1,4 +1,4 @@
-<?php namespace InfluxMetrics;
+<?php namespace yii\components;
 
 use InfluxDB\Client\Exception;
 use InfluxDB\Database;

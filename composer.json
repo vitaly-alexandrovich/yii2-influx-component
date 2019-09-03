@@ -1,7 +1,7 @@
 {
     "name": "vitaly-alexandrovich/yii2-influx-component",
     "description": "influx db",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "authors": [
         {
             "name": "Vitaly",
