@@ -73,12 +73,16 @@ class InfluxComponent extends Component
 	 */
 	public function track($name, $value = null, $tags = [], $fields = [], $timestamp = null)
 	{
+	    if ($timestamp === null) {
+            list($u, $sec) = explode(' ', microtime());
+            $timestamp = sprintf('%d%06d', $sec, $u * 1000000);
+        }
 		$this->points[] = new Point(
 			$name,
 			$value,
 			$tags,
 			$fields,
-			($timestamp === null ? time() : $timestamp)
+            $timestamp
 		);
 	}
 
