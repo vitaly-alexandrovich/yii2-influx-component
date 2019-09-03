@@ -74,7 +74,8 @@ class InfluxComponent extends Component
 	public function track($name, $value = null, $tags = [], $fields = [], $timestamp = null)
 	{
 	    if ($timestamp === null) {
-	        $timestamp = time();
+            list($u, $sec) = explode(' ', microtime());
+            $timestamp = sprintf('%d%06d', $sec, $u * 1000000);
         }
 		$this->points[] = new Point(
 			$name,
@@ -101,7 +102,7 @@ class InfluxComponent extends Component
 		try {
 			return $this
 				->database
-				->writePoints($this->points, Database::PRECISION_SECONDS);
+				->writePoints($this->points, Database::PRECISION_NANOSECONDS);
 
 		} catch (\InfluxDB\Exception $exception) {
 			\Yii::error($exception->getMessage(), 'InfluxMetricsComponent');
